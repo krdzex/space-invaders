@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const Spaceship = () => {
     const left = useSelector(state => state.moveShip);
     return (
-        <div className="ship" id="ship" style={{ left: left, top: 456 }}></div >
+        <div className="ship" id="ship" style={{ left: left, top: 460 }}></div >
     );
 };
 

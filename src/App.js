@@ -18,34 +18,40 @@ const App = () => {
     }
 
     if (e.key === ' ') {
-      makeBullet();
-      let dodji = setInterval(() => {
-        var alians = document.getElementsByClassName("alian");
-        var bullet1 = document.getElementById("bullet");
-        var bullet = document.getElementById("bullet").getBoundingClientRect();
-        var bodyRect = document.getElementById("App").getBoundingClientRect();
-        if (document.getElementById("bullet").getBoundingClientRect() !== null) {
-          if (bodyRect.y < bullet.y) {
-            bullet1.style.top = (parseInt(bullet1.style.top) - 1) + "px";
-            for (var i = 0; i < alians.length; i++) {
-              var alian = alians[i].getBoundingClientRect();
-              if (alian.y === bullet.y) {
-                console.log("A")
-              }
-              if (alians.x === bullet.x) {
-                console.log("B")
-              }
-            }
-          } else {
-            clearInterval(dodji);
-            bullet1.remove();
-          }
-        }
+      var bullet = document.getElementById("bullet");
+      if (bullet === null) {
+        makeBullet();
+        let dodji = setInterval(() => {
+          var alians = document.getElementsByClassName("alian");
+          var bullet1 = document.getElementById("bullet");
+          var bullet = document.getElementById("bullet").getBoundingClientRect();
+          var bodyRect = document.getElementById("App").getBoundingClientRect();
+          if (document.getElementById("bullet").getBoundingClientRect() !== null) {
+            if (bodyRect.y < bullet.y) {
+              bullet1.style.top = (parseInt(bullet1.style.top) - 5) + "px";
+              for (var i = 0; i < alians.length; i++) {
+                var alian = alians[i].getBoundingClientRect();
+                if (bullet.x < alian.x + 20 && bullet.x + 5 > alian.x
+                  && bullet.y < alian.y + 20 && bullet.y + 20 > alian.y && alians[i].style.backgroundColor !== "white") {
+                  alians[i].style.backgroundColor = "white"
 
-      }, 1);
+                  bullet1.remove();
+                  clearInterval(dodji)
+                }
+              }
+            } else {
+              clearInterval(dodji);
+              bullet1.remove();
+            }
+          }
+
+        }, 1);
+      }
     }
+
   }
   const makeBullet = () => {
+
     var bullet = document.getElementById("bullet");
     if (bullet === null) {
       var ship = document.getElementById("ship").getBoundingClientRect();
@@ -60,6 +66,9 @@ const App = () => {
     }
 
   }
+
+
+
   return (
     <div className="App" id="App" tabIndex="0" onKeyDown={moveShip}>
       <Alians />

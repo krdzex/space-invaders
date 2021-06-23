@@ -4,6 +4,8 @@ import moveShipDown from "./movingShipDown";
 const allReducers = combineReducers({
     moveShip,
     moveShipDown
+
+
 })
 
 export default allReducers;
