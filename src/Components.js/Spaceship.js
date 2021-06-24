@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux';
 
 const Spaceship = () => {
     const left = useSelector(state => state.moveShip);
-    return (
-        <div className="ship" id="ship" style={{ left: left, top: 460 }}></div >
+    return (<div className="spaceshipWrapper">
+        <div className="ship" id="ship" style={{ left: left, top: 60 }}></div >
+
+    </div>
     );
 };
 

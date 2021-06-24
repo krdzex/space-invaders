@@ -22,3 +22,16 @@ export const moveUp = () => {
     }
 }
 
+export const speed = () => {
+    return {
+        type: "SPEED_UP"
+    }
+}
+
+export const hit = () => {
+    return {
+        type: "HIT"
+    }
+}
+
+

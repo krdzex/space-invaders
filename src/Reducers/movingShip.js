@@ -1,9 +1,9 @@
-const moveShip = (state = 0, action) => {
+const moveShip = (state = 380, action) => {
     switch (action.type) {
         case "MOVE_LEFT":
-            return state - 5;
+            return state - 15;
         case "MOVE_RIGHT":
-            return state + 5;
+            return state + 15;
         default:
             return state;
     }

@@ -2,17 +2,22 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { moveDown, moveUp } from '../Actions';
 
+var speed2 = 20;
 const Alians = () => {
     const dispatch = useDispatch();
-    const alians = Array(5).fill(null)
+    const alians = Array(55).fill(null)
     const left = useSelector(state => state.moveShipDown);
-    var moving = setInterval(() => {
+
+    const speed = () => (speed2 -= 1);
+    const movingAlians = () => {
         const alians = document.getElementsByClassName("alian");
         const ship = document.getElementById("ship").getBoundingClientRect();
-        if ((parseInt(alians[0].style.top)) < ship.top) {
+
+        if (((parseInt(alians[alians.length - 1].style.top)) + 160) < ship.y) {
             if (left === false) {
                 for (let i = 0; i < alians.length; i++) {
-                    alians[i].style.left = (parseInt(alians[i].style.left) + 1) + "px";
+                    alians[i].style.left = (parseInt(alians[i].style.left) + 2) + "px";
+
                     if (parseInt(alians[alians.length - 1].style.left) === 300) {
                         for (let i = 0; i < alians.length; i++) {
                             alians[i].style.top = (parseInt(alians[i].style.top) + 20) + "px";
@@ -23,12 +28,14 @@ const Alians = () => {
                 }
             } else if (left === true) {
                 for (let i = 0; i < alians.length; i++) {
-                    alians[i].style.left = (parseInt(alians[i].style.left) - 1) + "px";
+
+                    alians[i].style.left = (parseInt(alians[i].style.left) - 2) + "px";
 
                     if (parseInt(alians[alians.length - 1].style.left) === -20) {
                         for (let i = 0; i < alians.length; i++) {
                             alians[i].style.top = (parseInt(alians[i].style.top) + 20) + "px";
                         }
+
                         dispatch(moveUp())
                         return clearInterval(moving)
                     }
@@ -37,8 +44,8 @@ const Alians = () => {
         } else {
             clearInterval(moving)
         }
-
-    }, 2);
+    }
+    var moving = setInterval(movingAlians, speed());
     return (
         <div className="alians">
             {alians.map((alian, id) => {
