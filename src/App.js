@@ -1,10 +1,10 @@
 import './App.css';
 import Spaceship from './Components.js/Spaceship';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { moveLeft, moveRight } from './Actions';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { enter, moveLeft, moveRight } from './Actions';
 import Alians from './Components.js/Alians';
-
+import EnterGame from './Components.js/EnterGame';
 
 
 const App = () => {
@@ -12,7 +12,6 @@ const App = () => {
   const dispatch = useDispatch();
   var result = 0;
   var shooting;
-
   const moveShip = (e) => {
     var ship = document.getElementById("ship").getBoundingClientRect();
     var app = document.getElementById("App").getBoundingClientRect();
@@ -29,6 +28,7 @@ const App = () => {
         shooting = setInterval(shoot, 1);
       }
     }
+
   }
 
 
@@ -42,8 +42,8 @@ const App = () => {
         for (var i = 0; i < alians.length; i++) {
           var alian = alians[i].getBoundingClientRect();
           if (bulletPosition.x < alian.x + 25 && bulletPosition.x + 5 > alian.x
-            && bulletPosition.y < alian.y + 20 && bulletPosition.y + 20 > alian.y && alians[i].style.backgroundColor !== "white") {
-            alians[i].style.backgroundColor = "white"
+            && bulletPosition.y < alian.y + 20 && bulletPosition.y + 20 > alian.y && alians[i].style.visibility !== "hidden") {
+            alians[i].style.visibility = "hidden"
             bullet.remove();
             result += 1;
             countResult();
@@ -67,9 +67,8 @@ const App = () => {
       var ship = document.getElementById("ship").getBoundingClientRect();
       var div = document.createElement('div');
       div.style.position = "relative";
-      console.log(ship.x)
       div.style.left = (ship.x + 18) + "px";
-      div.style.top = (20) + "px";
+      div.style.top = (-20) + "px";
       div.className = "bullet";
       div.id = "bullet"
       document.getElementById("appWrapper").appendChild(div)
@@ -77,16 +76,17 @@ const App = () => {
   }
   return (
     <div className="appWrapper" id="appWrapper" tabIndex="0" onKeyDown={moveShip}>
+      <EnterGame />
       <div className="App" id="App" >
         <Alians />
 
       </div>
-      <div>Score:
-        <div className="result" id="result"></div>
-      </div>
       <Spaceship />
-    </div >
-  );
+
+      <div style={{ color: "white" }}>Score:
+        <div className="result" id="result" style={{ color: 'white' }}>0</div>
+      </div>
+    </div >);
 }
 
 export default App;

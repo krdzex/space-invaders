@@ -34,4 +34,16 @@ export const hit = () => {
     }
 }
 
+export const enter = () => {
+    return {
+        type: "ENTER"
+    }
+}
+
+export const cantEnter = () => {
+    return {
+        type: "NOT_ENTER"
+    }
+}
+
 
