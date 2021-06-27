@@ -28,9 +28,15 @@ export const speed = () => {
     }
 }
 
-export const hit = () => {
+export const addScore = () => {
     return {
-        type: "HIT"
+        type: "ADD_SCORE"
+    }
+}
+
+export const resetScore = () => {
+    return {
+        type: "RESET_SCORE"
     }
 }
 
@@ -43,6 +49,18 @@ export const enter = () => {
 export const cantEnter = () => {
     return {
         type: "NOT_ENTER"
+    }
+}
+
+export const died = () => {
+    return {
+        type: "DIED"
+    }
+}
+
+export const resetLives = () => {
+    return {
+        type: "RESET_LIVES"
     }
 }
 

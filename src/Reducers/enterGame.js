@@ -3,7 +3,7 @@ const enterGame = (state = true, action) => {
         case "ENTER":
             return !state;
         case "NOT_ENTER":
-            return state = false;
+            return state = true;
         default:
             return state;
     }

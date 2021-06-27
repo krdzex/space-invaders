@@ -1,27 +1,36 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { moveDown, moveUp } from '../Actions';
+import { cantEnter, moveDown, moveUp, resetLives } from '../Actions';
 import alian1 from "../photos/alian1.png"
 import alian2 from "../photos/alian2.png"
 import alian3 from "../photos/alian3.png"
 import alian4 from "../photos/alian4.png"
 import alian5 from "../photos/alian5.png"
 
-var gameOver = false;
 var speed2 = 20;
 const Alians = () => {
+    var gameOver = false;
     const dispatch = useDispatch();
     const alians = Array(55).fill(null)
     const left = useSelector(state => state.moveShipDown);
-
-    const speed = () => (speed2 -= 1);
+    const speed = () => (speed2 -= 0.5);
+    var moving;
     const movingAlians = () => {
         const alians = document.getElementsByClassName("alian");
-        const ship = document.getElementById("ship").getBoundingClientRect();
+        //const ship = document.getElementById("ship").getBoundingClientRect();
         for (let i = 0; i < alians.length; i++) {
             const alian = alians[i].getBoundingClientRect();
-            if ((alian.y + 60) > ship.y && alians[i].style.visibility !== "hidden") {
+            if ((alian.y + 60) > 560 && alians[i].style.visibility !== "hidden") {
+
+                for (let i = 0; i < 999; i++) {
+                    window.clearInterval(i);
+                }
+
                 gameOver = true;
+                speed2 = 20;
+                dispatch(cantEnter())
+                dispatch(resetLives())
+                clearInterval(moving)
             }
         }
         if (left === false) {
@@ -34,6 +43,7 @@ const Alians = () => {
                     }
                     dispatch(moveDown())
                     clearInterval(moving)
+
                 }
             }
         } else if (left === true) {
@@ -52,9 +62,8 @@ const Alians = () => {
             }
         }
     }
-
     if (gameOver === false) {
-        var moving = setInterval(movingAlians, speed());
+        moving = setInterval(movingAlians, speed());
     }
     return (
         <div className="alians">
