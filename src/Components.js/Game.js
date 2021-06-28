@@ -25,7 +25,6 @@ const Game = () => {
             var bullet = document.getElementById("bullet");
             if (bullet === null) {
                 makeBullet();
-                //makeAlianBullet();
                 shooting = setInterval(shoot, 1);
             }
         }
@@ -79,14 +78,26 @@ const Game = () => {
                 niz.push(i);
             }
         }
-        var randomAlian = Math.floor(Math.random() * (niz.length - 1 + 1)) + 0;
+        if (niz.length !== 0) {
+            var randomAlian = Math.floor(Math.random() * (niz.length - 1 + 1)) + 0;
+        }
+        if (niz.length === 0) {
+            for (let i = 0; i < alians.length; i++) {
+                let alian = alians[i];
+                alian.style.visibility = "visible";
+                alian.style.top = "20px"
+                alian.style.left = "0px"
+            }
+            enemyBulletSpeed = 2000;
+        }
         return niz[randomAlian];
     }
 
 
     const makeAlianBullet = () => {
+        console.log(randomAlian2())
         var alians = document.getElementsByClassName("alian");
-        if (alians.length > 0) {
+        if (alians.length > 0 && randomAlian2() !== undefined) {
             var alian = alians[randomAlian2()].getBoundingClientRect();
             var ship = document.getElementById("ship").getBoundingClientRect();
             var diff = alian.y - ship.y;
@@ -115,7 +126,7 @@ const Game = () => {
                             enemyBullet.remove();
                             stopShooting -= 1;
                             if (stopShooting === 0) {
-                                for (let i = 0; i < 999; i++) {
+                                for (let i = 0; i < 9999; i++) {
                                     window.clearInterval(i);
                                 }
                                 // clearInterval(random)
@@ -143,7 +154,7 @@ const Game = () => {
         } else {
             enemyBulletSpeed -= 2
         }
-        console.log(enemyBulletSpeed)
+
         makeAlianBullet()
         setTimeout(uradi, enemyBulletSpeed);
     }
@@ -151,15 +162,7 @@ const Game = () => {
     setTimeout(
         uradi
         , enemyBulletSpeed);
-    /* setTimeout(function callback() {
-         console.log("A")
-         // do something
-         setTimeout(callback, rate + 10000);
-     });*/
 
-    /*var random = setInterval(
-        makeAlianBullet
-        , alianBulletSpeed());*/
     return (
         <div className="appWrapper" id="appWrapper" tabIndex="0" onKeyDown={moveShip}>
             <div className="App" id="App" >

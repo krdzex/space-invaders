@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { enter, moveUp, resetScore } from '../Actions';
+import { enter, moveRightAlians, resetScore } from '../Actions';
 const EnterGame = () => {
     const dispatch = useDispatch()
     const pressEnter = (e) => {
@@ -8,7 +8,7 @@ const EnterGame = () => {
             var div = document.getElementById("enterGameWrapper");
             div.style.visibility = "hidden";
             dispatch(enter())
-            dispatch(moveUp())
+            dispatch(moveRightAlians())
             dispatch(resetScore())
         }
     }

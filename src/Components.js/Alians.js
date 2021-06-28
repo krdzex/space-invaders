@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cantEnter, moveDown, moveUp, resetLives } from '../Actions';
+import { cantEnter, moveLeftAlians, moveRightAlians, resetLives } from '../Actions';
 import alian1 from "../photos/alian1.png"
 import alian2 from "../photos/alian2.png"
 import alian3 from "../photos/alian3.png"
@@ -9,10 +9,28 @@ import alian5 from "../photos/alian5.png"
 
 var speed2 = 20;
 const Alians = () => {
+    useEffect(() => {
+        speed2 = 20;
+    }, [])
     var gameOver = false;
+
+    const resetSpeed = () => {
+        var niz = [];
+        var alians = document.getElementsByClassName("alian");
+        for (let i = 0; i < alians.length; i++) {
+            var alian = alians[i].style.visibility;
+            if (alian !== "hidden") {
+                niz.push(i);
+            }
+        }
+        if (niz.length === 0) {
+            speed2 = 20;
+        }
+    }
+
     const dispatch = useDispatch();
     const alians = Array(55).fill(null)
-    const left = useSelector(state => state.moveShipDown);
+    const left = useSelector(state => state.moveShipSide);
     const speed = () => (speed2 -= 0.5);
     var moving;
     const movingAlians = () => {
@@ -41,9 +59,8 @@ const Alians = () => {
                     for (let i = 0; i < alians.length; i++) {
                         alians[i].style.top = (parseInt(alians[i].style.top) + 20) + "px";
                     }
-                    dispatch(moveDown())
+                    dispatch(moveLeftAlians())
                     clearInterval(moving)
-
                 }
             }
         } else if (left === true) {
@@ -56,12 +73,14 @@ const Alians = () => {
                         alians[i].style.top = (parseInt(alians[i].style.top) + 20) + "px";
                     }
 
-                    dispatch(moveUp())
-                    return clearInterval(moving)
+                    dispatch(moveRightAlians())
+                    clearInterval(moving)
                 }
             }
         }
+        resetSpeed();
     }
+
     if (gameOver === false) {
         moving = setInterval(movingAlians, speed());
     }

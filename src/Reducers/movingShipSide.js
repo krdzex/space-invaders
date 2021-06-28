@@ -1,8 +1,8 @@
 const moveShipDown = (state = false, action) => {
     switch (action.type) {
-        case "MOVE_DOWN":
+        case "MOVE_LEFT_ALIANS":
             return !state;
-        case "MOVE_UP":
+        case "MOVE_RIGHT_ALIANS":
             return state = false;
         default:
             return state;

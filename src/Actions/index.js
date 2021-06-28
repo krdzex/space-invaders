@@ -10,21 +10,15 @@ export const moveLeft = () => {
     }
 }
 
-export const moveDown = () => {
+export const moveLeftAlians = () => {
     return {
-        type: "MOVE_DOWN"
+        type: "MOVE_LEFT_ALIANS"
     }
 }
 
-export const moveUp = () => {
+export const moveRightAlians = () => {
     return {
-        type: "MOVE_UP"
-    }
-}
-
-export const speed = () => {
-    return {
-        type: "SPEED_UP"
+        type: "MOVE_RIGHT_ALIANS"
     }
 }
 
@@ -63,5 +57,4 @@ export const resetLives = () => {
         type: "RESET_LIVES"
     }
 }
-
 
