@@ -1,4 +1,4 @@
-const moveShipDown = (state = false, action) => {
+const moveAliansSide = (state = false, action) => {
     switch (action.type) {
         case "MOVE_LEFT_ALIANS":
             return !state;
@@ -9,4 +9,4 @@ const moveShipDown = (state = false, action) => {
     }
 }
 
-export default moveShipDown;
+export default moveAliansSide;

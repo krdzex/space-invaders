@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import moveShip from "./movingShip";
-import moveShipSide from "./movingShipSide";
+import moveAliansSide from "./movingAliansSide";
 import enterGame from "./enterGame";
 import score from "./hittedAlian";
 import lives from "./shipLives";
 
 const allReducers = combineReducers({
     moveShip,
-    moveShipSide,
+    moveAliansSide,
     enterGame,
     score,
     lives,

@@ -30,7 +30,7 @@ const Alians = () => {
 
     const dispatch = useDispatch();
     const alians = Array(55).fill(null)
-    const left = useSelector(state => state.moveShipSide);
+    const left = useSelector(state => state.moveAliansSide);
     const speed = () => (speed2 -= 0.5);
     var moving;
     const movingAlians = () => {
