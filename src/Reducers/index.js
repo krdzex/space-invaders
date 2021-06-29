@@ -10,7 +10,7 @@ const allReducers = combineReducers({
     moveAliansSide,
     enterGame,
     score,
-    lives,
+    lives
 
 })
 
