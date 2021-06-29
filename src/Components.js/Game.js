@@ -29,7 +29,6 @@ const Game = () => {
     const moveShip = (e) => {
         let ship = document.getElementById("ship").getBoundingClientRect();
         let app = document.getElementById("App").getBoundingClientRect();
-        console.log(app.x, app.width)
         if (e.key === "ArrowRight" && ship.right < (app.x + app.width + 300)) {
             dispatch(moveRight());
         } else if (e.key === "ArrowLeft" && ship.left > app.x) {
@@ -204,7 +203,6 @@ const Game = () => {
 
 
         }, 1);
-        console.log(movingEnemyBullet)
     }
     /* Because i need to change timing of firing i made setTimeouts to do like but now i can change speed
     This will basicly make loop that will call repeatEnemyBullet and make bullets just with incrementing speed of making bullets 
